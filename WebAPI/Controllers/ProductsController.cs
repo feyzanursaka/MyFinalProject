@@ -15,7 +15,6 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        //Dependency chain
         //Loosely coupled
         //IoC Container -- Inversion of control
         IProductService _productService;
@@ -25,13 +24,37 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
-        public List<Product> Get()
-        {  
-            
+        [HttpGet("getall")]
+        public IActionResult Get()
+        {
+            //Dependency chain
             var result = _productService.GetAll();
-
-            return result.Data;
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result );
+        }
+        [HttpGet("getbyid")]
+        public IActionResult Get(int id)
+        {
+            //Dependency chain
+            var result = _productService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("add")]
+        public IActionResult Post(Product product)
+        {
+            var result = _productService.Add(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
