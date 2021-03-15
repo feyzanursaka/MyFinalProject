@@ -34,7 +34,7 @@ namespace Business.Concrete
                 CheckIfProductNameExists(product.ProductName),CheckIfCategoryLimitExceded());
             if (result != null)
             {
-                return null;
+                return result;
             }
 
             _productDal.Add(product);
