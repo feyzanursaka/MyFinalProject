@@ -43,7 +43,8 @@ namespace WebAPI
             //services.AddSingleton<IProductService, ProductManager>();
             //services.AddSingleton<IProductDal, EfProductDal>();
 
-           
+            services.AddCors();
+
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -72,6 +73,8 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder=>builder.WithOrigins("http://localhost:55535").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
