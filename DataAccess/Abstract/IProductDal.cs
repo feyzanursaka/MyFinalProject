@@ -9,8 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal : IEntityRepository<Product>
     {
-        List<ProductDetailDto> GetProductDetail();
+        List<ProductDetailDto> GetProductDetails();
     }
 }
-
-//Code Refactoring
